@@ -118,11 +118,7 @@
       <button type="button">Instellingen</button>
     </nav>
 
-    <!--
-      Nieuw onderdeel voor deze opdracht: de lijst met uitgevoerde
-      inspecties (op datum gesorteerd), incl. detailweergave bij
-      aanklikken. Wordt door script.js gevuld.
-    -->
+ 
     <section id="inspection-list" class="inspection-list">
       <h2>Uitgevoerde inspecties</h2>
       <div id="inspection-list-body"><p>Inspecties laden...</p></div>
@@ -131,67 +127,10 @@
   </main>
 
   <script>
-    /* =============================================================
-     * RealEstateCare — Inspecties
-     * =============================================================
-     * Bevat, in dit ene script, alles wat de opdracht vraagt:
-     *   1. Het datamodel      -> zie het JSDoc-typedef "Inspection"
-     *   2. De service         -> InspectionService (doet de API-call)
-     *   3. De lijst-component -> InspectionListComponent
-     *   4. De detail-component-> InspectionDetailComponent
-     *
-     * Hoort bij: inspections.json (de mock data / bron voor de web API).
-     *
-     * Hoe te draaien, LOKAAL (voor tijdens het bouwen/testen, geen
-     * npm/build-tool nodig):
-     *   1. Zet index.html en db.json in dezelfde map.
-     *   2. Start vanuit die map een simpele lokale webserver, bv.:
-     *        python3 -m http.server 8000
-     *      of, als je node hebt:
-     *        npx http-server -p 8000
-     *   3. Open http://localhost:8000 in je browser.
-     *
-     * Hoe te draaien met een ECHTE web API (voor de inlevering, zoals
-     * de opdracht vraagt — "dit mag bijvoorbeeld MyJSONServer zijn"):
-     *   1. Zorg dat db.json in de root van je GitHub-repo staat (dat
-     *      moet toch, want je publiceert je prototype daar sowieso).
-     *   2. Zet API_URL hieronder op:
-     *        "https://my-json-server.typicode.com/JOUW-GEBRUIKERSNAAM/JOUW-REPO/inspections"
-     *      (MyJSONServer leest jouw db.json en zet elke top-level key
-     *      -- hier "inspections" -- automatisch om in een los
-     *      REST-endpoint dat je met een gewone API-call kunt aanroepen.)
-     *   3. Klaar — de rest van de code hoeft niet te veranderen; de
-     *      service hieronder herkent zelf of hij een los array
-     *      (van MyJSONServer) of het lokale db.json-bestand
-     *      (met een "inspections"-property) binnenkrijgt.
-     * ============================================================= */
-
-    /**
-     * @typedef {"damage"|"maintenance"|"installation"|"modification"} InspectionType
-     *
-     * Datamodel — komt 1-op-1 overeen met de velden in db.json.
-     * @typedef {Object} Inspection
-     * @property {string} id
-     * @property {string} propertyAddress
-     * @property {InspectionType} inspectionType
-     * @property {string} inspectionDate  ISO 8601-datumnotatie: yyyy-MM-dd
-     * @property {string} inspectorName
-     * @property {string} description
-     */
 
     const ALLOWED_INSPECTION_TYPES = ["damage", "maintenance", "installation", "modification"];
 
-    /**
-     * Het datamodel in de praktijk: zet een los, ongevalideerd JSON-
-     * object om in een gestructureerde, gevalideerde Inspection.
-     * Ontbreekt er een verplicht veld, of klopt het inspectionType
-     * niet, dan gooit dit een duidelijke fout — zo structureert het
-     * model daadwerkelijk de binnenkomende data, in plaats van alleen
-     * te documenteren hoe die eruit hoort te zien.
-     *
-     * @param {*} raw
-     * @returns {Inspection}
-     */
+
     function createInspection(raw) {
       if (!raw || typeof raw !== "object") {
         throw new Error("Ongeldige inspectie: verwacht een object.");
@@ -208,11 +147,7 @@
       return { id, propertyAddress, inspectionType, inspectionDate, inspectorName, description };
     }
 
-    // ---------------------------------------------------------------
-    // 2. Service — doet de (asynchrone) API-call, gescheiden van de
-    //    componenten hieronder, en structureert de respons via het
-    //    datamodel (createInspection) voordat de data verder gaat.
-    // ---------------------------------------------------------------
+ 
     const API_URL = "db.json";
 
     const InspectionService = {
@@ -224,28 +159,21 @@
         }
         const payload = await response.json();
 
-        // MyJSONServer geeft de collectie direct als array terug
-        // (GET .../inspections); het lokale db.json geeft het hele
-        // bestand terug, met de array onder de "inspections"-key.
+     
         const rawInspections = Array.isArray(payload) ? payload : payload.inspections;
 
         return rawInspections.map(createInspection);
       },
     };
 
-    // ---------------------------------------------------------------
-    // 3. Lijst-component — rendert de inspecties, op datum gesorteerd.
-    // ---------------------------------------------------------------
+    
     function formatDate(isoDate) {
       const [year, month, day] = isoDate.split("-");
       return `${day}-${month}-${year}`;
     }
 
     const InspectionListComponent = {
-      /**
-       * @param {Inspection[]} inspections
-       * @param {(inspection: Inspection) => void} onSelect
-       */
+  
       render(inspections, onSelect) {
         const container = document.getElementById("inspection-list-body");
 
@@ -290,12 +218,9 @@
       },
     };
 
-    // ---------------------------------------------------------------
-    // 4. Detail-component — toont de details van de geselecteerde
-    //    inspectie, onder de lijst.
-    // ---------------------------------------------------------------
+  
     const InspectionDetailComponent = {
-      /** @param {Inspection} inspection */
+      
       render(inspection) {
         const container = document.getElementById("inspection-detail-body");
         container.innerHTML = `
@@ -322,10 +247,7 @@
       },
     };
 
-    // ---------------------------------------------------------------
-    // App-initialisatie: haal de data op via de service, en render
-    // daarna de lijst-component.
-    // ---------------------------------------------------------------
+  
     InspectionService.getInspections()
       .then((inspections) => {
         InspectionListComponent.render(inspections, (inspection) => {
