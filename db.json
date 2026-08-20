@@ -1,0 +1,52 @@
+{
+  "inspections": [
+    {
+      "id": "insp-1001",
+      "propertyAddress": "Kerkstraat 12, 1234 AB Amsterdam",
+      "inspectionType": "damage",
+      "inspectionDate": "2026-03-14",
+      "inspectorName": "Renate de Boer",
+      "description": "Waterschade in de badkamer door een lekkage (calamiteit). Acute actie vereist."
+    },
+    {
+      "id": "insp-1002",
+      "propertyAddress": "Dorpsstraat 45, 3811 CT Amersfoort",
+      "inspectionType": "maintenance",
+      "inspectionDate": "2026-02-28",
+      "inspectorName": "Youssef El Amrani",
+      "description": "Achterstallig schilderwerk aan de kozijnen, kostenindicatie 500-1.500 euro, geen acute actie vereist."
+    },
+    {
+      "id": "insp-1003",
+      "propertyAddress": "Molenweg 8, 7511 AK Enschede",
+      "inspectionType": "installation",
+      "inspectionDate": "2026-04-02",
+      "inspectorName": "Renate de Boer",
+      "description": "Inspectie cv-installatie: gemelde storing bij opstarten, testprocedure doorlopen en goedgekeurd."
+    },
+    {
+      "id": "insp-1004",
+      "propertyAddress": "Prinsengracht 210, 1016 HL Amsterdam",
+      "inspectionType": "modification",
+      "inspectionDate": "2026-01-19",
+      "inspectorName": "Sanne Verhoeven",
+      "description": "Zelf aangelegde vloerverwarming door huurder aangetroffen; actie: laten keuren."
+    },
+    {
+      "id": "insp-1005",
+      "propertyAddress": "Havenstraat 3, 3011 XA Rotterdam",
+      "inspectionType": "damage",
+      "inspectionDate": "2026-03-30",
+      "inspectorName": "Youssef El Amrani",
+      "description": "Slijtageschade aan het trapportaal door normaal gebruik. Geen acute actie vereist."
+    },
+    {
+      "id": "insp-1006",
+      "propertyAddress": "Stationsplein 5, 9711 KG Groningen",
+      "inspectionType": "installation",
+      "inspectionDate": "2026-04-10",
+      "inspectorName": "Sanne Verhoeven",
+      "description": "Inspectie ventilatiesysteem: storing gemeld, test niet goedgekeurd, vervolgactie vereist."
+    }
+  ]
+}
